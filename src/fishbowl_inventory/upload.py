@@ -40,12 +40,12 @@ def upload_csv_to_firebase(local_csv_path: str, cloud_file_path: str) -> Optiona
         return None
 
     try:
-        blob: Blob = bucket.blob(cloud_path)
+        blob: Blob = bucket.blob(cloud_file_path)
         blob.upload_from_filename(local_csv_path)
-        print(f"✅ Uploaded {filename} to {cloud_path}")
-        return cloud_path
+        print(f"✅ Uploaded to {cloud_file_path}")
+        return cloud_file_path
     except Exception as e:
-        print(f"❌ Failed to upload {filename}: {e}")
+        print(f"❌ Failed to upload {cloud_file_path}: {e}")
         return None
 
 
@@ -64,17 +64,9 @@ def main():
     day = current_date.strftime("%d")
     
     # Construct the cloud path with year, month, day, and relative path of the file
-    cloud_file_path = f"Logs/{year}/{month}/{day}/{file_name}"
-            
-    # Example: upload all .csv files in the folder
-    csv_files = glob.glob(os.path.join(directory, "*.csv"))
+    cloud_file_path = f"Fishbowl/Reports/{year}/{month}/{day}/{file_name}"
 
-    if not csv_files:
-        print("⚠️ No CSV files found for upload.")
-        return
-
-    for file_path in csv_files:
-        upload_csv_to_firebase(local_csv_path=f"{directory}/{file_name}", cloud_file_path=cloud_file_path)
+    upload_csv_to_firebase(local_csv_path=f"{directory}/{file_name}", cloud_file_path=cloud_file_path)
 
 
 if __name__ == "__main__":
