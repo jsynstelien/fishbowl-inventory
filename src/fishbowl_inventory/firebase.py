@@ -35,11 +35,8 @@ class FireStore:
             decoded = json.loads(base64.b64decode(encoded).decode("utf-8"))
             cert = credentials.Certificate(decoded)
 
-        # Only initialize Firebase once
-        if not firestore._apps:
-            initialize_app(cert, {
-                'storageBucket': storage_bucket
-            })
+        # Initialize Firebase once
+        initialize_app(cert, {'storageBucket': storage_bucket})
 
         self.db: firestore.Client = firestore.client()
         self.bucket: Bucket = storage.bucket()

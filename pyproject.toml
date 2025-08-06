@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fishbowl_inventory"
-version = "0.0.2"
+version = "0.0.4"
 authors = [
   { name="Justin Synstelien", email="justin.synstelien3@gmail.com" },
 ]
@@ -15,6 +15,9 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+]
+dependencies = [
+  "firebase_admin"
 ]
 
 [project.urls]
